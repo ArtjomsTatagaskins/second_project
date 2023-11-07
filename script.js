@@ -1,10 +1,11 @@
 let computerSelection = getComputerChoice();
-let playerSelection = 'rock';
+let playerSelection = 'scissors';
 let playerWins = 0;
 let computerWins = 0;
+let draw = 0;
 
 function getComputerChoice() {
-    let variants = ['Paper', 'Scissors'];
+    let variants = ['Paper', 'Scissors', 'Rock'];
     let choice = variants[Math.floor(Math.random() * variants.length)];
     return choice;
 }
@@ -21,9 +22,41 @@ function playRound(playerSelection, computerSelection) {
         winner = 'computer';
     }
     if (playerSelectionToLower === 'rock' && computerSelection === 'Scissors') {
-        result = 'You win! Rock beats Scissors'
+        result = 'You win! Rock beats Scissors';
         playerWins++;
         winner = 'player';
+    }
+    if (playerSelectionToLower === 'paper' && computerSelection === 'Scissors') {
+        result = 'You lose! Scissors beats Paper!';
+        computerWins++;
+        winner = 'computer';
+    }
+    if (playerSelectionToLower === 'paper' && computerSelection === 'Rock') {
+        result = 'You win! Paper beats Rock!';
+        playerWins++;
+        winner = 'player';
+    }
+    if (playerSelectionToLower === 'scissors' && computerSelection === 'Paper') {
+        result = 'You win! Scissors beats Paper!';
+        playerWins++;
+        winner = 'player';
+    }
+    if (playerSelectionToLower === 'scissors' && computerSelection === 'Rock') {
+        result = 'You lose! Rock beats Scissors!';
+        computerWins++;
+        winner = 'computer';
+    }
+    if (playerSelectionToLower === 'scissors' && computerSelection === 'Scissors') {
+        result = 'Draw';
+        draw++;
+    }
+    if (playerSelectionToLower === 'rock' && computerSelection === 'Rock') {
+        result = 'Draw';
+        draw++;
+    }
+    if (playerSelectionToLower === 'paper' && computerSelection === 'Paper') {
+        result = 'Draw';
+        draw++;
     }
     return {result, winner};
 }
@@ -36,6 +69,7 @@ function game(numberOfRounds) {
     }
 }
 
-game(5);
+game(10000);
 console.log('Player wins: ' + playerWins);
 console.log('Computer wins: ' + computerWins);
+console.log('Draws: ' + draw);
